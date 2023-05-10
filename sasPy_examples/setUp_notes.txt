@@ -1,0 +1,53 @@
+These files need to be created and referenced only once.
+
+Using a text editor, we recommend you create two files:
+"sascfg_personal.py"
+
+"_authinfo"
+
+Create sascfg_personal.py containing the following information based on your SAS OnDemand for Academics Home Region.
+
+You can simply copy and paste the entire code block below. Be sure to uncomment only the 'iomhost' key for your home region. You can leave the others commented out or delete them.
+* US Region is uncommented as an example.
+NOTE: You will likely need to change the JAVA location (and if on Linux or MacOS, the path would be more like '/usr/bin/java')
+
+SAS_config_names=['oda']
+oda = {'java' : 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath\\java.exe',
+#US Home Region 1
+'iomhost' : ['odaws01-usw2.oda.sas.com','odaws02-usw2.oda.sas.com','odaws03-usw2.oda.sas.com','odaws04-usw2.oda.sas.com'],
+#US Home Region 2
+#'iomhost' : ['odaws01-usw2-2.oda.sas.com','odaws02-usw2-2.oda.sas.com'],
+#European Home Region 1
+#'iomhost' : ['odaws01-euw1.oda.sas.com','odaws02-euw1.oda.sas.com'],
+#Asia Pacific Home Region 1
+#'iomhost' : ['odaws01-apse1.oda.sas.com','odaws02-apse1.oda.sas.com'],
+#Asia Pacific Home Region 2
+#'iomhost' : ['odaws01-apse1-2.oda.sas.com','odaws02-apse1-2.oda.sas.com'],
+'iomport' : 8591,
+'authkey' : 'oda',
+'encoding' : 'utf-8'
+}
+
+Save sascfg_personal.py to your SASPy installation location.
+Run the following commands in your Python command window to get the full pathname of where to save your sascfg_personal.py file.
+
+import saspy, os
+print(saspy.__file__.replace('__init__.py', 'sascfg_personal.py'))
+
+# saved here: \\wsl.localhost\Ubuntu\home\collid\miniconda3\envs\dmc1\lib\python3.9\site-packages\saspy
+
+Create _authinfo using the below as a template (.authinfo if on Linux or MacOS). See the saspy instructions for more information on this topic.
+You will need to change "ODA_EMAIL" or "ODA_USERNAME" and "ODA_PASSWORD" to your SAS OnDemand for Academics credentials.
+
+oda user ODA_EMAIL or ODA_USERNAME password ODA_PASSWORD
+
+Save _authinfo to your user's home directory C:\Users\'YOUR_USERNAME' on Windows.
+RETURN TO TOPgo to top
+Connect to the SAS OnDemand for Academics Servers from Python
+This step should be performed any time that you want to connect to hosted SAS servers.
+
+From a Python prompt or from another Python interface, like Jupyter Notebook, use the following commands to confirm a connection to SAS OnDemand for Academics.
+
+import saspy
+sas_session = saspy.SASsession()
+sas_session
